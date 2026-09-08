@@ -12,9 +12,10 @@ namespace InventoryManagementSystem
             Name = string.Empty;
             Price = 0.0m;
             Quantity = 0;
+            Next = null;
         }
 
-
+        public Product? Next { get; set; }
         public int ProductId { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }

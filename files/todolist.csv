@@ -1,0 +1,46 @@
+Task Title,Task Notes,Step Title
+Inventory Management System,,Project Setup
+Inventory Management System,,Main Menu
+Inventory Management System,,Add Product Feature
+Inventory Management System,,Update Product Feature
+Inventory Management System,,Delete Product Feature
+Inventory Management System,,View Products
+Inventory Management System,,Generate Report
+
+Project Setup,Setup and initialization for the C# project,Create new C# console project
+Project Setup,,Create Product class
+Project Setup,,Create Inventory class
+Project Setup,,Set up JSON file handling
+Project Setup,,Test initial compile
+
+Main Menu,Implement the main navigation menu,Create menu layout
+Main Menu,,Add input handling
+Main Menu,,Add loop for continuous use
+Main Menu,,Add menu options (Add, Update, Delete, View, Report, Exit)
+
+Add Product Feature,Implement product creation flow,Prompt for ID, Name, Quantity, Price
+Add Product Feature,,Create Product object
+Add Product Feature,,Add to inventory list
+Add Product Feature,,Save to JSON
+Add Product Feature,,Confirm to user
+
+Update Product Feature,Implement product update flow,Prompt for product ID
+Update Product Feature,,Search inventory list
+Update Product Feature,,Update fields
+Update Product Feature,,Save changes to JSON
+Update Product Feature,,Confirm update
+
+Delete Product Feature,Implement product deletion flow,Prompt for product ID
+Delete Product Feature,,Search inventory list
+Delete Product Feature,,Remove product
+Delete Product Feature,,Save updated list
+Delete Product Feature,,Confirm deletion
+
+View Products,Display all products,Show all products
+View Products,,Format output
+View Products,,Include ID, Name, Quantity, Price
+
+Generate Report,Create inventory summary,Calculate total inventory value
+Generate Report,,Summarize inventory levels
+Generate Report,,Format report
+Generate Report,,Optional: save report to file
