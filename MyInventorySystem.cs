@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
@@ -374,7 +375,7 @@ namespace InventoryManagementSystem
                         if(tmpName.Length > 0)
                         {
                             tmpName = char.ToUpper(tmpName[0]) + tmpName.Substring(1); // Capitalize the first letter of the product name
-                            productToChange.Name = tmpName;
+                            productToChange?.Name = tmpName;
 
                         }
                     }
@@ -414,7 +415,7 @@ namespace InventoryManagementSystem
 
                             if (tmpPriceValue > 0)
                             {
-                                productToChange.Price = tmpPriceValue;
+                                productToChange?.Price = tmpPriceValue;
                             }
                             else
                             {
@@ -464,7 +465,7 @@ namespace InventoryManagementSystem
                             int tmpQuantityValue = int.Parse(tmpQuantity ?? "0");
                             if (tmpQuantityValue > 0)
                             {
-                                productToChange.Quantity = tmpQuantityValue;
+                                productToChange?.Quantity = tmpQuantityValue;
                             }
                             else
                             {
