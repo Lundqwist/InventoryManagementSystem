@@ -1,0 +1,12 @@
+@startuml
+title Create Product - sequence (as implemented)
+actor User
+participant UI as "MyInventorySystem"
+participant Manager as "InventoryManager"
+
+User -> UI: chooses "Add Product"
+UI -> UI: gather inputs and validate
+UI -> Manager: AddProduct(Product)
+Manager --> UI: "<product name> has been added to the inventory." (or error)
+UI -> User: show confirmation
+@enduml

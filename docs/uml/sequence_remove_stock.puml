@@ -1,0 +1,16 @@
+@startuml
+title Delete Product (by id or name) - sequence (as implemented)
+actor User
+participant UI as "MyInventorySystem"
+participant Manager as "InventoryManager"
+
+User -> UI: selects "Delete Product"
+UI -> UI: prompt for id or name
+alt input is numeric
+  UI -> Manager: DeleteProduct(int id)
+else input is text
+  UI -> Manager: DeleteProduct(string name)
+end
+Manager --> UI: console output (found/not found)
+UI -> User: display result
+@enduml

@@ -1,0 +1,12 @@
+@startuml
+title Add Product (flow as implemented in project)
+actor User
+participant UI as "MyInventorySystem"
+participant Manager as "InventoryManager"
+
+User -> UI: selects "Add Product" in menu
+UI -> UI: collect product fields (name, price, qty)
+UI -> Manager: AddProduct(Product)
+Manager --> UI: string resultMessage
+UI -> User: display resultMessage
+@enduml

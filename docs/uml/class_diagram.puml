@@ -1,0 +1,53 @@
+@startuml
+' Inventory Management System - Class Diagram (generated from project sources - AS IS)
+package "Domain" {
+  class Product {
+	+int ProductId
+	+string Name
+	+decimal Price
+	+int Quantity
+	+Product? Next
+	+void DisplayProductInfo(int x, int y)
+  }
+}
+
+package "Core" {
+  class InventoryManager {
+	+static int productIdCounter
+	+static bool isDirty
+	+static int productCount
+	+static string AddProduct(Product)
+	+static void DeleteProduct(int)
+	+static void DeleteProduct(string)
+	+static bool UpdateProduct(Product)
+	+static void ViewProducts(int x, int y)
+	+static void ViewProduct(int x, int y, Product p)
+	+static void GenerateReport()
+	+static void SaveToFile()
+	+static void LoadFromFile()
+	+static bool CheckForDuplicateProductName(string name)
+	+static decimal UpdateInventoryValue()
+  }
+
+  class MyInventorySystem {
+	+void Run()
+	+void Menu()
+	+void AddProduct()
+	+void UpdateProduct()
+	+void DeleteProduct()
+	+void ViewProducts()
+	+void GenerateReport()
+	+void SaveToFile()
+	+void LoadFromFile()
+  }
+
+  class Program {
+	+static void Main(string[] args)
+  }
+}
+
+Product "1" -- "0..1" Product : next >
+MyInventorySystem ..> InventoryManager : uses >
+Program ..> MyInventorySystem : creates >
+
+@enduml

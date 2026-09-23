@@ -1,0 +1,20 @@
+@startuml
+title Inventory Management System - Components (AS IS)
+[Console UI] as UI
+[MyInventorySystem] as App
+[InventoryManager] as Manager
+[File Storage] as Storage
+
+UI --> App: user interaction
+App --> Manager: calls (Add/Update/Delete/View/Save/Load)
+Manager --> Storage: SaveToFile/LoadFromFile
+
+note left of UI
+  Console-based UI implemented in MyInventorySystem
+end note
+
+note right of Storage
+  Simple file-based persistence (SaveToFile / LoadFromFile)
+end note
+
+@enduml
