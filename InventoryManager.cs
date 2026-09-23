@@ -54,63 +54,79 @@ namespace InventoryManagementSystem
 
 
         // Delete a product by its ID
-        internal static string  DeleteProduct(int productId)
+        internal static void DeleteProduct(int productId)
         {
             Product? currentProduct = firstProduct;
+            bool productFound = false;
             if (currentProduct?.ProductId == productId)
             {
                 firstProduct = currentProduct.Next;
                 productCount--;     // Decrement the product count
                 isDirty = true;
+                productFound = true;
                 if (firstProduct == null)
                 {
 
                     lastProduct = null; // List is now empty
-                    return "Last product found and deleted. \nList is now empty.";        // Product found and deleted
-                }
-                return "Product found and deleted.";        // Product found and deleted
-            }
 
-            while (currentProduct?.Next != null)
+                }
+
+            }
+            else
             {
-                if (currentProduct.Next.ProductId == productId)
+                while (currentProduct?.Next != null)
                 {
-                    if (currentProduct.Next == lastProduct)
+                    if (currentProduct.Next.ProductId == productId)
                     {
-                        lastProduct = currentProduct; // Update lastProduct if we're deleting the last product
-                    }
-                    else
-                    {
-                        currentProduct.Next = currentProduct.Next.Next;
-                    }
+                        if (currentProduct.Next == lastProduct)
+                        {
+                            lastProduct = currentProduct; // Update lastProduct if we're deleting the last product
+                        }
+                        else
+                        {
+                            currentProduct.Next = currentProduct.Next.Next;
+                        }
 
-                    productCount--;     // Decrement the product count
-                    isDirty = true;
-                    return "Product found and deleted.";        // Product found and deleted
+                        productCount--;     // Decrement the product count
+                        isDirty = true;
+                        productFound = true;
+
+                    }
+                    currentProduct = currentProduct.Next;
                 }
             }
-
-
-            return "Product not found."; // Product not found
+            if (productFound)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Product found and deleted."); // Product not found
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Product not found."); // Product not found
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            Console.WriteLine("Press any key to continue.");
+            Console.ReadKey();
         }
 
         // if deletion by product name is needed, this method can be used
-        internal static string DeleteProduct(string productName)
+        internal static void DeleteProduct(string productName)
         {
             Product? currentProduct = firstProduct;
-
+            bool productFound = false;
             if (currentProduct!=null && currentProduct.Name.Equals(productName, StringComparison.OrdinalIgnoreCase))
             {
                 firstProduct = currentProduct.Next;
                 productCount--;     // Decrement the product count
                 isDirty = true;
+                productFound = true;
                 if (firstProduct == null)
                 {
-
                     lastProduct = null; // List is now empty
-                    return "Last product found and deleted. \nList is now empty.";        // Product found and deleted
                 }
-                return "Product found and deleted.";        // Product found and deleted
+
             }
             else
             {
@@ -129,17 +145,32 @@ namespace InventoryManagementSystem
                         }
                         productCount--;     // Decrement the product count
                         isDirty = true;
+                        productFound = true;
 
-                        return "Product found and deleted.";        // Product found and deleted
+
                     }
                     currentProduct = currentProduct.Next;
                 }
             }
 
-            return "Product not found."; // Product not found
+            if (productFound)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Product found and deleted."); // Product not found
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Product not found."); // Product not found
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            Console.WriteLine("Press any key to continue.");
+            Console.ReadKey();
+
         }
 
-       
+
 
 
         // Update a product's details by its ID
@@ -160,8 +191,7 @@ namespace InventoryManagementSystem
                 currentProduct = currentProduct.Next;
 
             }
-
-
+            
             return false;  // Product not found
         }
 
@@ -250,6 +280,12 @@ namespace InventoryManagementSystem
                 currentProduct = currentProduct.Next;
             }
             System.IO.File.AppendAllText("generated_report.txt", "Total Value: " + totalValue + Environment.NewLine);
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Report generated.");
+            Console.WriteLine("Press any key to continue.");
+            Console.ReadKey();
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         internal static void SaveToFile()

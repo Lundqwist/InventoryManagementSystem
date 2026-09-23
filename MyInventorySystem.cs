@@ -355,167 +355,182 @@ namespace InventoryManagementSystem
                     productToChange = InventoryManager.GetProductByName(input);
 
                 }
-
                 if (productToChange != null)
                 {
-                    InventoryManager.ViewProduct(0, 20, productToChange); // Display the product details before updating
-                    
+
+
+
+
+                    if (productToChange != null)
+                    {
+                        InventoryManager.ViewProduct(0, 20, productToChange); // Display the product details before updating
+
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Product not found.");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine("\nPress any key to continue.");
+                        Console.ReadKey();
+
+                    }
+
+                    Console.SetCursorPosition(0, 12);
+                    Console.WriteLine("Enter new value - empty = keep value");
+                    bool newInput = false;
+                    while (!newInput)
+                    {
+                        newInput = true;
+                        Console.SetCursorPosition(0, 13);
+                        Console.Write("Enter new name: ");
+                        Console.SetCursorPosition(25, 13);
+                        string tmpName = Console.ReadLine()?.Trim().ToLower() ?? string.Empty;
+
+
+                        // Check for duplicate product name and ensure it's not empty
+                        if (tmpName.Length == 0)
+                        {
+                            // Nothing changes - no overwrite
+                        }
+                        else if (InventoryManager.CheckForDuplicateProductName(tmpName) == false)
+                        {
+                            if (tmpName.Length > 0)
+                            {
+                                tmpName = char.ToUpper(tmpName[0]) + tmpName.Substring(1); // Capitalize the first letter of the product name
+                                productToChange?.Name = tmpName;
+
+                            }
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Product name already exists. \nPlease enter a different name.");
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.WriteLine("\nPress any key to continue.");
+                            Console.ReadKey();
+                            newInput = false;
+                        }
+                    }
+
+                    newInput = false;
+                    while (!newInput)
+                    {
+                        newInput = true;
+                        Console.SetCursorPosition(0, 13);
+                        for (int i = 0; i < 4; i++)
+                        {
+                            Console.WriteLine("                                 ");
+                        }
+
+                        Console.SetCursorPosition(0, 13);
+                        Console.Write("Enter product price:");
+
+                        Console.SetCursorPosition(25, 13);
+                        string tmpPrice = Console.ReadLine()?.Trim()?.Trim() ?? string.Empty;
+
+                        if (tmpPrice.Length > 0)
+                        {
+                            // Validate price input
+                            try
+                            {
+                                decimal tmpPriceValue = decimal.Parse(tmpPrice ?? "0");
+
+                                if (tmpPriceValue > 0)
+                                {
+                                    productToChange?.Price = tmpPriceValue;
+                                }
+                                else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("Price cannot be negative. \nPlease enter a valid price.");
+                                    Console.ForegroundColor = ConsoleColor.White;
+                                    Console.WriteLine("\nPress any key to continue.");
+                                    Console.ReadKey();
+                                    newInput = false;
+                                    return;
+                                }
+                            }
+                            catch (FormatException)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("Invalid price format. \nPlease enter a valid decimal number.");
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.WriteLine("\nPress any key to continue.");
+                                Console.ReadKey();
+                                newInput = false;
+                            }
+                        }
+                    }
+
+                    newInput = false;
+                    while (!newInput)
+                    {
+                        newInput = true;
+                        Console.SetCursorPosition(0, 13);
+                        for (int i = 0; i < 4; i++)
+                        {
+                            Console.WriteLine("                                 ");
+                        }
+
+                        Console.SetCursorPosition(0, 13);
+                        Console.Write("Enter product quantity:");
+
+                        Console.SetCursorPosition(25, 13);
+                        string tmpQuantity = Console.ReadLine()?.Trim() ?? string.Empty;
+
+                        // Validate quantity input
+                        if (tmpQuantity.Length > 0)
+                        {
+
+                            try
+                            {
+                                int tmpQuantityValue = int.Parse(tmpQuantity ?? "0");
+                                if (tmpQuantityValue > 0)
+                                {
+                                    productToChange?.Quantity = tmpQuantityValue;
+                                }
+                                else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Red;
+                                    Console.WriteLine("Quantity cannot be negative. \nPlease enter a valid quantity.");
+                                    Console.ForegroundColor = ConsoleColor.White;
+                                    Console.WriteLine("\nPress any key to continue.");
+                                    Console.ReadKey();
+                                    newInput = false;
+                                    return;
+                                }
+
+                            }
+                            catch (FormatException)
+                            {
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("Invalid quantity format. \nPlease enter a valid integer.");
+                                Console.ForegroundColor = ConsoleColor.White;
+                                Console.WriteLine("\nPress any key to continue.");
+                                Console.ReadKey();
+                                newInput = false;
+                            }
+                        }
+                    }
+                    InventoryManager.UpdateProduct(productToChange);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.SetCursorPosition(0, 23);
+                    Console.WriteLine("New product information: ");
+                    InventoryManager.ViewProduct(0, 24, productToChange); // Display the product details before updating
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("\n\nPress any key to continue.");
+                    Console.ReadKey();
                 }
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Product not found.");
-                    Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine("\nPress any key to continue.");
                     Console.ReadKey();
+                    Console.ForegroundColor = ConsoleColor.White;
 
                 }
-
-                Console.SetCursorPosition(0, 12);
-                Console.WriteLine("Enter new value - empty = keep value");
-                bool newInput = false;
-                while (!newInput)
-                {
-                    newInput = true;
-                    Console.SetCursorPosition(0, 13);
-                    Console.Write("Enter new name: ");
-                    Console.SetCursorPosition(25, 13);
-                    string tmpName = Console.ReadLine()?.Trim().ToLower() ?? string.Empty;
-
-
-                    // Check for duplicate product name and ensure it's not empty
-                    if(tmpName.Length == 0)
-                    {
-                        // Nothing changes - no overwrite
-                    }
-                    else if (InventoryManager.CheckForDuplicateProductName(tmpName) == false)
-                    {   
-                        if(tmpName.Length > 0)
-                        {
-                            tmpName = char.ToUpper(tmpName[0]) + tmpName.Substring(1); // Capitalize the first letter of the product name
-                            productToChange?.Name = tmpName;
-
-                        }
-                    }
-                    else
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Product name already exists. \nPlease enter a different name.");
-                        Console.ForegroundColor = ConsoleColor.White;
-                        Console.WriteLine("\nPress any key to continue.");
-                        Console.ReadKey();
-                        newInput = false;
-                    }
-                }
-
-                newInput = false;
-                while (!newInput)
-                {
-                    newInput = true;
-                    Console.SetCursorPosition(0, 13);
-                    for (int i = 0; i < 4; i++)
-                    {
-                        Console.WriteLine("                                 ");
-                    }
-                    
-                    Console.SetCursorPosition(0, 13);
-                    Console.Write("Enter product price:");
-                    
-                    Console.SetCursorPosition(25, 13);
-                    string tmpPrice = Console.ReadLine()?.Trim()?.Trim() ?? string.Empty;
-
-                    if (tmpPrice.Length >0)
-                    {
-                        // Validate price input
-                        try
-                        {
-                            decimal tmpPriceValue = decimal.Parse(tmpPrice ?? "0");
-
-                            if (tmpPriceValue > 0)
-                            {
-                                productToChange?.Price = tmpPriceValue;
-                            }
-                            else
-                            {
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("Price cannot be negative. \nPlease enter a valid price.");
-                                Console.ForegroundColor = ConsoleColor.White;
-                                Console.WriteLine("\nPress any key to continue.");
-                                Console.ReadKey();
-                                newInput = false;
-                                return;
-                            }
-                        }
-                        catch (FormatException)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("Invalid price format. \nPlease enter a valid decimal number.");
-                            Console.ForegroundColor = ConsoleColor.White;
-                            Console.WriteLine("\nPress any key to continue.");
-                            Console.ReadKey();
-                            newInput = false;
-                        }
-                    }
-                }
-
-                newInput = false;
-                while (!newInput)
-                {
-                    newInput = true;
-                    Console.SetCursorPosition(0, 13);
-                    for (int i = 0; i < 4; i++)
-                    {
-                        Console.WriteLine("                                 ");
-                    }
-                    
-                    Console.SetCursorPosition(0, 13);
-                    Console.Write("Enter product quantity:");
-                    
-                    Console.SetCursorPosition(25, 13);
-                    string tmpQuantity = Console.ReadLine()?.Trim() ?? string.Empty;
-
-                    // Validate quantity input
-                    if (tmpQuantity.Length > 0)
-                    {
-
-                        try
-                        {
-                            int tmpQuantityValue = int.Parse(tmpQuantity ?? "0");
-                            if (tmpQuantityValue > 0)
-                            {
-                                productToChange?.Quantity = tmpQuantityValue;
-                            }
-                            else
-                            {
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine("Quantity cannot be negative. \nPlease enter a valid quantity.");
-                                Console.ForegroundColor = ConsoleColor.White;
-                                Console.WriteLine("\nPress any key to continue.");
-                                Console.ReadKey();
-                                newInput = false;
-                                return;
-                            }
-
-                        }
-                        catch (FormatException)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("Invalid quantity format. \nPlease enter a valid integer.");
-                            Console.ForegroundColor = ConsoleColor.White;
-                            Console.WriteLine("\nPress any key to continue.");
-                            Console.ReadKey();
-                            newInput = false;
-                        }
-                    }
-                }
-                InventoryManager.UpdateProduct(productToChange);
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.SetCursorPosition(0, 23);
-                Console.WriteLine("New product information: ");
-                InventoryManager.ViewProduct(0, 24, productToChange); // Display the product details before updating
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("\n\nPress any key to continue.");
-                Console.ReadKey();
 
                 Console.SetCursorPosition(0, 20);
                 for (int i = 0; i < 8; i++)
@@ -526,7 +541,6 @@ namespace InventoryManagementSystem
                 }
 
             }
-            Console.WriteLine(result);
         }
 
         internal void DeleteProduct()
@@ -540,24 +554,17 @@ namespace InventoryManagementSystem
                 if (input.All(char.IsDigit))
                 {
                     int productId = int.Parse(input);
-                    result = InventoryManager.DeleteProduct(productId);
+                    InventoryManager.DeleteProduct(productId);
                 }
                 else
                 {
-                    result = InventoryManager.DeleteProduct(input);
+                    InventoryManager.DeleteProduct(input);
                 }
             }
             else
             {
                 input = "Nothing was deleted.";
             }
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(result);
-            Console.ForegroundColor = ConsoleColor.White;
-
-            Console.WriteLine("\nPress any key to continue.");
-            Console.ReadKey();
-
 
         }
 
