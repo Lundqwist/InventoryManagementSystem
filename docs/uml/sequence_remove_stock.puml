@@ -1,0 +1,25 @@
+@startuml
+title Remove Stock / Shipment - sequence
+actor User
+participant UI as "UI/MyInventorySystem"
+participant Manager as "InventoryManager"
+participant InvRepo as "IInventoryRepository"
+participant ProdRepo as "IProductRepository"
+
+User -> UI: Request RemoveStock(productId, qty)
+UI -> Manager: RemoveStock(productId, qty, reason)
+Manager -> ProdRepo: Get(productId)
+ProdRepo --> Manager: Product
+Manager -> InvRepo: GetByProduct(productId)
+InvRepo --> Manager: InventoryItem
+alt enough stock
+  Manager -> InventoryItem: AdjustQuantity(-qty)
+  Manager -> InvRepo: Save(InventoryItem)
+  Manager -> InvRepo: RecordAdjustment(StockAdjustment)
+  Manager --> UI: success
+else insufficient
+  Manager --> UI: error("Insufficient stock")
+end
+UI --> User: result
+
+@enduml

@@ -26,7 +26,14 @@ namespace InventoryManagementSystem
             }
             else
             {
-                productToAdd.ProductId = productIdCounter++;
+                if(productToAdd.ProductId == 0) // If the product ID is not set, assign a new unique ID
+                {
+                    productToAdd.ProductId = productIdCounter++;
+                }
+                else if (productToAdd.ProductId >= productIdCounter) // Ensure the counter is always ahead of any manually set IDs
+                {
+                    productIdCounter = productToAdd.ProductId + 1;
+                }
                 if (firstProduct == null)
                 {
                     firstProduct = productToAdd;
@@ -227,10 +234,78 @@ namespace InventoryManagementSystem
 
         internal static void GenerateReport()
         {
+            // Implementation for saving to a file
+
+            Product currentProduct = firstProduct;
+            int totalValue = 0;
+            string productData;
+            while (currentProduct != null)
+            {
+                totalValue += (int)(currentProduct.Price * currentProduct.Quantity);
+
+                productData = $"ProductId: {currentProduct.ProductId}, \tProductName: {currentProduct.Name}, \tProductPrice: {currentProduct.Price}, \tProductQuantity: {currentProduct.Quantity}";
+              
+                System.IO.File.AppendAllText("generated_report.txt", productData + Environment.NewLine);
+
+                currentProduct = currentProduct.Next;
+            }
+            System.IO.File.AppendAllText("generated_report.txt", "Total Value: " + totalValue + Environment.NewLine);
+        }
+
+        internal static void SaveToFile()
+        {
+
+            Product currentProduct = firstProduct;
+            string productData;
+
+            while (currentProduct != null)
+            {
+
+                productData = $"{currentProduct.ProductId},{currentProduct.Name},{currentProduct.Price},{currentProduct.Quantity}";
+
+                System.IO.File.AppendAllText("inventory.txt", productData + Environment.NewLine);
+
+                currentProduct = currentProduct.Next;
+            }
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Inventory saved to file.");
+            Console.WriteLine("\nPress any key to continue.");
+            Console.ReadKey();  
+            Console.ForegroundColor = ConsoleColor.White;
 
         }
 
-        
+        internal static void LoadFromFile()
+        {
+            // Implementation for loading from a file
+            if (System.IO.File.Exists("inventory.txt"))
+            {
+                string[] lines = System.IO.File.ReadAllLines("inventory.txt");
+                foreach (string line in lines)
+                {
+                    string[] fields = line.Split(',');
+                    if (fields.Length == 4)
+                    {
+                        Product newProduct = new Product();
+                        newProduct.ProductId = int.Parse(fields[0]);
+                        newProduct.Name = fields[1];
+                        newProduct.Price = decimal.Parse(fields[2]);
+                        newProduct.Quantity = int.Parse(fields[3]);
+                        AddProduct(newProduct);
+                        // Create a new product and add it to the inventory
+                        // Add the new product to the linked list
+                        // (Assuming there's a method to add a product to the linked list)
+                    }
+                }
+            }
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Inventory loaded from file.");
+            Console.WriteLine("\nPress any key to continue.");
+            Console.ReadKey();
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
+
         // Get a product by its ID. as information for the user to update or delete a product
         internal static Product GetProductById(int productId)
         {

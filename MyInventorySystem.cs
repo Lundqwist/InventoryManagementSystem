@@ -21,7 +21,7 @@ namespace InventoryManagementSystem
         internal MyInventorySystem()
         {
 
-
+            
         }
 
         internal void Run()
@@ -108,7 +108,10 @@ namespace InventoryManagementSystem
             Console.WriteLine(" 2. Update Product");
             Console.WriteLine(" 3. Delete Product");
             Console.WriteLine(" 4. View Inventory");
-            Console.WriteLine(" 5. Generate Report\n");
+            Console.WriteLine(" 5. Generate Report");
+            Console.WriteLine(" 6. Save to File");
+            Console.WriteLine(" 7. Load from File");
+
             Console.WriteLine(" 9. Exit\n");
 
 
@@ -135,11 +138,21 @@ namespace InventoryManagementSystem
                 case "5":
                     GenerateReport();
                     break;
+
+                case "6":
+                    SaveToFile();
+                    break;
+                case "7":
+                    LoadFromFile();
+                    break;
                 case "9":
                     isRunning = false;
                     break;
                 default:
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Invalid choice. Please try again.");
+                    Console.ReadKey();
+                    Console.ForegroundColor = ConsoleColor.White;
                     Menu();
                     break;
             }
@@ -314,6 +327,11 @@ namespace InventoryManagementSystem
                 }
             }
             InventoryManager.AddProduct(newProduct);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Product added successfully.");
+            Console.WriteLine("\nPress any key to continue.");
+            Console.ReadKey();
+            Console.ForegroundColor = ConsoleColor.White;
 
         }
 
@@ -551,9 +569,20 @@ namespace InventoryManagementSystem
         internal void GenerateReport()
         {
 
-
+            InventoryManager.GenerateReport();
 
         }
+
+        internal void SaveToFile()
+        {
+            InventoryManager.SaveToFile();
+        }
+
+        internal void LoadFromFile()
+        {
+            InventoryManager.LoadFromFile();
+        }
+
 
         // An attempt at temporary error-messages that got removed after a while.
         // Not used because it also changes the current cursor position.
