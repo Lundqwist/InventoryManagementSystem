@@ -9,7 +9,7 @@ namespace InventoryManagementSystem
         internal static int productIdCounter = 1;  // Counter for generating unique product IDs not the same as how many products are in the inventory
         private static Product? firstProduct = null;         // First product in linked list
         private static Product? lastProduct = null;          // Last product in linked list
-        internal static bool isDirty = false;
+        internal static bool isDirty = false;               // Shows if the inventory has been modified since last ViewProducts or SaveToFile
 
         internal static int productCount = 0; // Counter for the number of products
 
@@ -327,6 +327,13 @@ namespace InventoryManagementSystem
                         newProduct.Name = fields[1];
                         newProduct.Price = decimal.Parse(fields[2]);
                         newProduct.Quantity = int.Parse(fields[3]);
+                        if(InventoryManager.CheckForDuplicateProductId(newProduct.ProductId) || InventoryManager.CheckForDuplicateProductName(newProduct.Name))
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine($"Duplicate Product {newProduct.ProductId} found in file.");
+                            Console.ForegroundColor = ConsoleColor.White;
+                            continue; // Skip adding this product
+                        }
                         AddProduct(newProduct);
                         // Create a new product and add it to the inventory
                         // Add the new product to the linked list
@@ -388,7 +395,21 @@ namespace InventoryManagementSystem
 
             return false;
         }
+        internal static bool CheckForDuplicateProductId(int productId)
+        {
+            Product? currentProduct = firstProduct;
 
+            while (currentProduct != null)
+            {
+                if (currentProduct.ProductId == productId)
+                {
+                    return true; // Duplicate found
+                }
+                currentProduct = currentProduct.Next; // Move to the next product in the linked list
+            }
+
+            return false;
+        }
         internal static decimal UpdateInventoryValue()
         {
             decimal totalValue = 0;
