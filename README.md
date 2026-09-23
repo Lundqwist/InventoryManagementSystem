@@ -1,78 +1,91 @@
 # Inventory Management System
 
-Lightweight Inventory Management System built with .NET 10.
+Lightweight Inventory Management System (console) implemented with .NET 10.
 
 ## Overview
 
-This project provides a simple inventory management application intended for educational and small business use. It includes core functionality for tracking products, stock levels, and basic inventory operations.
+This repository contains a small console-based inventory management application intended for learning and small-scale usage. It implements a simple in-memory linked-list product store with file save/load, basic reporting and a text menu UI.
 
-Key goals:
-- Demonstrate a clean .NET 10 project structure
-- Provide a starting point for extending inventory features (reports, users, integrations)
+Goals:
+- Provide a working .NET 10 example for inventory operations
+- Keep the codebase small and easy to extend (reports, persistence, API)
 
 ## Features
 
-- Product CRUD (Create, Read, Update, Delete)
-- Stock tracking and adjustments
-- Basic reporting and console / UI entry points (depending on included projects)
+- Add / Update / Delete products
+- View inventory and generate a simple report
+- Save to and load from file
 
 ## Prerequisites
 
-- .NET 10 SDK (install from https://dotnet.microsoft.com)
-- Visual Studio 2022 or newer (recommended) or Visual Studio Code
+- .NET 10 SDK: https://dotnet.microsoft.com
+- A code editor (Visual Studio 2022/2026, Visual Studio Code) — recommended
 
-Verify your .NET SDK version:
+Check your .NET SDK version:
 
 ```powershell
 dotnet --version
 ```
 
-The output should report a 10.x version.
+The output should be a 10.x version.
 
 ## Getting Started
 
-Open the solution in Visual Studio:
-
-1. Open `InventoryManagementSystem.slnx` in Visual Studio.
-2. Set your startup project and run (F5) or build (Ctrl+Shift+B).
-
-Or use the .NET CLI:
+Run the console application from the repository root:
 
 ```powershell
-cd path\to\InventoryManagementSystem
-dotnet build
-dotnet run --project src/YourStartupProject/YourStartupProject.csproj
+dotnet run --project InventoryManagementSystem.csproj
 ```
 
-Replace `src/YourStartupProject/YourStartupProject.csproj` with the actual project file you intend to run (for example a console app or web API project in the solution).
+Alternatively open `InventoryManagementSystem.slnx` in Visual Studio and run the project.
+
+When running the app you'll see a menu with options:
+- 1: Add Product
+- 2: Update Product
+- 3: Delete Product
+- 4: View Inventory
+- 5: Generate Report
+- 6: Save to File
+- 7: Load from File
 
 ## Project Structure
 
-- src/ - main application projects
-- tests/ - unit and integration tests (if present)
-- docs/ - documentation (optional)
-
-Adjust paths to match the repository layout if different.
+- InventoryManagementSystem.csproj — main console project
+- Program.cs — application entry point
+- MyInventorySystem.cs — console UI and user interactions
+- InventoryManager.cs — core inventory logic (static manager)
+- Product.cs — product model (linked-list node)
+- docs/uml — PlantUML sources and rendered diagrams
 
 ## Configuration
 
-Application configuration is typically stored in appsettings.json for ASP.NET projects or other project-specific configuration files. Check each project for its own configuration file and update connection strings, logging, and other settings before running in a production environment.
+This is a minimal console app and has no external configuration by default. If you add persistent storage or configuration files later, put them under appsettings.json or a config folder and document them here.
 
 ## Running Tests
 
-If the repository contains tests, run them with:
-
-```powershell
-dotnet test
-```
+There are no automated tests included currently. To add tests, create a test project and use `dotnet test`.
 
 ## Contributing
 
-Contributions are welcome. Open an issue to discuss changes or submit a pull request. Keep changes focused, include tests for new behavior, and follow existing code style patterns.
+Contributions and suggestions are welcome. Recommended workflow:
+
+1. Open an issue to discuss large changes or features.
+2. Create a branch for your work: `git checkout -b feat/your-feature`.
+3. Keep changes focused and add tests where possible.
+4. Submit a pull request describing the change and motivation.
+
+I'm open to suggestions — file feature requests, roadmap ideas, or small improvements via issues or PRs.
+
+## Suggested Improvements (open to discussion)
+
+- Add unit tests for InventoryManager operations
+- Replace linked-list storage with a collection or database-backed repository
+- Add a Web API or minimal UI for remote access
+- Improve persistence format (JSON/SQLite) and error handling
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE section below.
+This project is licensed under the MIT License. See the LICENSE file for full text.
 
 ---
 
@@ -97,3 +110,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
