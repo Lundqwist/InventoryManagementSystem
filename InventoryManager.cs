@@ -269,6 +269,10 @@ namespace InventoryManagementSystem
             Product currentProduct = firstProduct;
             int totalValue = 0;
             string productData;
+            if (System.IO.File.Exists("generated_report.txt"))
+            {
+                System.IO.File.Delete("generated_report.txt");
+            }
             while (currentProduct != null)
             {
                 totalValue += (int)(currentProduct.Price * currentProduct.Quantity);
@@ -293,6 +297,12 @@ namespace InventoryManagementSystem
 
             Product currentProduct = firstProduct;
             string productData;
+
+            // create code that deletes the file if it already exists before saving the new data
+            if (System.IO.File.Exists("inventory.txt"))
+            {
+                System.IO.File.Delete("inventory.txt");
+            }
 
             while (currentProduct != null)
             {

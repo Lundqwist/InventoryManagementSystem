@@ -41,7 +41,7 @@ namespace InventoryManagementSystem
         {
 
             //Console.Clear();
-            for (int y = 0; y < 20; y++)
+            for (int y = 0; y < 27; y++)
             {
                 Console.SetCursorPosition(0, y);
 
@@ -184,9 +184,9 @@ namespace InventoryManagementSystem
             {
                 newInput = true;
                 Console.SetCursorPosition(0, 13);
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < 10; i++)
                 {
-                    Console.WriteLine("                                 ");
+                    Console.WriteLine("                                       ");
                 }
                 Console.SetCursorPosition(0, 13);
                 Console.Write("Enter product name:");
@@ -227,9 +227,9 @@ namespace InventoryManagementSystem
             {
                 newInput = true;
                 Console.SetCursorPosition(0, 13);
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < 10; i++)
                 {
-                    Console.WriteLine("                                 ");
+                    Console.WriteLine("                                       ");
                 }
                 
                 Console.SetCursorPosition(0, 13);
@@ -337,7 +337,7 @@ namespace InventoryManagementSystem
 
         internal void UpdateProduct()
         {
-            string result = "";
+
             Product? productToChange = null;
             Console.SetCursorPosition(0, 12);
             Console.WriteLine("Enter the ID or name of Product:");
@@ -418,9 +418,9 @@ namespace InventoryManagementSystem
                     {
                         newInput = true;
                         Console.SetCursorPosition(0, 13);
-                        for (int i = 0; i < 4; i++)
+                        for (int i = 0; i < 10; i++)
                         {
-                            Console.WriteLine("                                 ");
+                            Console.WriteLine("                                       ");
                         }
 
                         Console.SetCursorPosition(0, 13);
@@ -468,9 +468,9 @@ namespace InventoryManagementSystem
                     {
                         newInput = true;
                         Console.SetCursorPosition(0, 13);
-                        for (int i = 0; i < 4; i++)
+                        for (int i = 0; i < 10; i++)
                         {
-                            Console.WriteLine("                                 ");
+                            Console.WriteLine("                                       ");
                         }
 
                         Console.SetCursorPosition(0, 13);
