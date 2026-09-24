@@ -13,8 +13,8 @@ namespace InventoryManagementSystem
     internal class MyInventorySystem
     {
 
-        private bool isRunning = true;
-        
+        private bool isRunning = true;                      // Flag to control the main loop of the inventory management system
+
         /*
          * Run method is the main entry point of the inventory management system.
          * It runs a loop that displays the menu and processes user input until the user chooses to exit.

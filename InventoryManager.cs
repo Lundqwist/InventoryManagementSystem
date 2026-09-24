@@ -6,12 +6,16 @@ namespace InventoryManagementSystem
 {
     internal class InventoryManager
     {
-        internal static int productIdCounter = 1;  // Counter for generating unique product IDs not the same as how many products are in the inventory
-        private static Product? firstProduct = null;         // First product in linked list
-        private static Product? lastProduct = null;          // Last product in linked list
-        internal static bool isDirty = false;               // Shows if the inventory has been modified since last ViewProducts or SaveToFile
 
-        internal static int productCount = 0; // Counter for the number of products
+        //       THIS SYSTEM USES A LINKED LIST TO STORE PRODUCTS IN THE INVENTORY.
+         
+
+        internal static int productIdCounter = 1;               // Counter for generating unique product IDs not the same as how many products are in the inventory
+        private static Product? firstProduct = null;            // First product in linked list
+        private static Product? lastProduct = null;             // Last product in linked list
+        internal static bool isDirty = false;                   // Shows if the inventory has been modified since last ViewProducts or SaveToFile
+
+        internal static int productCount = 0;                   // Counter for the number of products
 
         
 
@@ -55,6 +59,7 @@ namespace InventoryManagementSystem
                 return productToAdd.Name + " has been added to the inventory.";
             }
         }
+
 
         /*
          * DeleteProduct method removes a product from the inventory based on its ID.
@@ -117,6 +122,7 @@ namespace InventoryManagementSystem
             Console.WriteLine("Press any key to continue.");
             Console.ReadKey();
         }
+
 
         /*
          * DeleteProduct method removes a product from the inventory based on its name.
@@ -348,6 +354,7 @@ namespace InventoryManagementSystem
 
         }
 
+
         /*
          * LoadFromFile method loads the inventory from a file.
          * It reads each line from the file and creates a new product for each line.
@@ -433,7 +440,6 @@ namespace InventoryManagementSystem
         }
 
 
-
         /*
          * CheckForDuplicateProductName method checks if a product with the same name already exists in the inventory.
          * It searches for the product in the linked list and returns true if found.
@@ -456,6 +462,7 @@ namespace InventoryManagementSystem
             return false;
         }
 
+
         /*
          * CheckForDuplicateProductId method checks if a product with the same ID already exists in the inventory.
          * It searches for the product in the linked list and returns true if found.
@@ -477,6 +484,7 @@ namespace InventoryManagementSystem
 
             return false;
         }
+
 
         /*
          * UpdateInventoryValue method calculates the total value of the inventory.
