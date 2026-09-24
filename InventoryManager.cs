@@ -18,7 +18,6 @@ namespace InventoryManagementSystem
         private static Product? firstProduct = null;            // First product in linked list
         private static Product? lastProduct = null;             // Last product in linked list
         internal static bool isDirty = false;                   // Shows if the inventory has been modified since last ViewProducts or SaveToFile
-
         internal static int productCount = 0;                   // Counter for the number of products
 
         
