@@ -14,16 +14,12 @@ namespace InventoryManagementSystem
     {
 
         private bool isRunning = true;
-
-
-
-
-        internal MyInventorySystem()
-        {
-
-            
-        }
-
+        
+        /*
+         * Run method is the main entry point of the inventory management system.
+         * It runs a loop that displays the menu and processes user input until the user chooses to exit.
+         * The method calls the Menu method to display the menu and handle user input.
+         */
         internal void Run()
         {
 
@@ -37,6 +33,14 @@ namespace InventoryManagementSystem
             Console.ReadKey();
         }
 
+        /*
+         * Menu method displays the main menu of the inventory management system.
+         * It shows the current status of the product list, number of products, and total inventory value.
+         * The user can select an option to add, update, delete, view products, generate a report, save to file, load from file, or exit the program.
+         * 
+         * The method uses a switch statement to handle user input and call the appropriate methods for each option.
+         * Invalid input is handled by displaying an error message and prompting the user to try again.
+         */
         internal void Menu()
         {
 
@@ -335,6 +339,17 @@ namespace InventoryManagementSystem
 
         }
 
+
+        /*UpdateProduct method allows the user to update an existing product in the inventory.
+         * It prompts the user for the product's ID or name, retrieves the product, and displays its current details.
+         * The user can then enter new values for the product's name, price, and quantity.
+         * The input is validated and then updated in the inventory.
+         * 
+         * Checks for duplicate product name and prompts user to enter a new name if duplicate is found.
+         * Sets price and quantity to 0 if user enters invalid input.
+         * Checks price input for negative values and prompts user to enter a new price if negative value is found.
+         * Checks quantity input for negative values and prompts user to enter a new quantity if negative value is found.
+         */
         internal void UpdateProduct()
         {
 
@@ -543,6 +558,13 @@ namespace InventoryManagementSystem
             }
         }
 
+
+        /*DeleteProduct method allows the user to delete an existing product from the inventory.
+         * It prompts the user for the product's ID or name, retrieves the product, and deletes it from the inventory.
+         * The input is validated and then deleted from the inventory.
+         * 
+         * If the input is empty, it will not delete anything and will display a message indicating that nothing was deleted.
+         */
         internal void DeleteProduct()
         {
             string result = "";
@@ -568,11 +590,21 @@ namespace InventoryManagementSystem
 
         }
 
+
+        /*ViewProducts method displays the list of products in the inventory.
+         * It calls the InventoryManager.ViewProducts method to display the products.
+         * The products are displayed in a tabular format with their ID, name, price, and quantity.
+         */
         internal void ViewProducts()
         {
             InventoryManager.ViewProducts(47, 3);
         }
 
+
+        /*GenerateReport method generates a report of the products in the inventory.
+         * It calls the InventoryManager.GenerateReport method to generate the report.
+         * The report is displayed in a tabular format with their ID, name, price, and quantity.
+         */
         internal void GenerateReport()
         {
 
@@ -580,11 +612,21 @@ namespace InventoryManagementSystem
 
         }
 
+
+        /*SaveToFile method saves the current state of the inventory to a file.
+         * It calls the InventoryManager.SaveToFile method to save the inventory to a file.
+         * The file is saved in the current directory with the name "inventory.txt".
+         */
         internal void SaveToFile()
         {
             InventoryManager.SaveToFile();
         }
 
+
+        /*LoadFromFile method loads the inventory from a file.
+         * It calls the InventoryManager.LoadFromFile method to load the inventory from a file.
+         * The file is loaded from the current directory with the name "inventory.txt".
+         */
         internal void LoadFromFile()
         {
             InventoryManager.LoadFromFile();

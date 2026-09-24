@@ -21,7 +21,7 @@ namespace InventoryManagementSystem
         public decimal Price { get; set; }
         public int Quantity { get; set; }
 
-
+        // Method to display product information at a specific console position
         internal void DisplayProductInfo(int x, int y)
         {
             Console.SetCursorPosition(x, y);

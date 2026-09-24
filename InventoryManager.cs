@@ -15,8 +15,12 @@ namespace InventoryManagementSystem
 
         
 
-
-        // Add a new product to the inventory
+        /*
+         * AddProduct method adds a new product to the inventory.
+         * It checks if a product with the same name already exists.
+         * If not, it adds the product to the inventory and returns a success message.
+         * If a product with the same name already exists, it returns an error message.
+         */
         internal static string AddProduct(Product productToAdd)
         {
             if (CheckForDuplicateProductName(productToAdd.Name))
@@ -52,8 +56,11 @@ namespace InventoryManagementSystem
             }
         }
 
-
-        // Delete a product by its ID
+        /*
+         * DeleteProduct method removes a product from the inventory based on its ID.
+         * It searches for the product in the linked list and removes it if found.
+         * If the product is not found, it returns an error message.
+         */
         internal static void DeleteProduct(int productId)
         {
             Product? currentProduct = firstProduct;
@@ -111,7 +118,11 @@ namespace InventoryManagementSystem
             Console.ReadKey();
         }
 
-        // if deletion by product name is needed, this method can be used
+        /*
+         * DeleteProduct method removes a product from the inventory based on its name.
+         * It searches for the product in the linked list and removes it if found.
+         * If the product is not found, it returns an error message.
+         */
         internal static void DeleteProduct(string productName)
         {
             Product? currentProduct = firstProduct;
@@ -171,9 +182,11 @@ namespace InventoryManagementSystem
         }
 
 
-
-
-        // Update a product's details by its ID
+        /*
+         * UpdateProduct method updates a product's details by its ID.
+         * It searches for the product in the linked list and updates its details if found.
+         * If the product is not found, it returns an error message.
+         */
         internal static bool UpdateProduct(Product updatedProduct)
         {
             Product? currentProduct = firstProduct;
@@ -196,8 +209,10 @@ namespace InventoryManagementSystem
         }
 
         
-        
-        // View all products in the inventory and print them at given x and y coordinates in the console
+        /*
+         * ViewProducts method displays all products in the inventory.
+         * It prints the product details at the specified x and y coordinates in the console.
+         */
         internal static void ViewProducts(int x, int y)
         {
             Product? currentProduct = firstProduct;
@@ -236,6 +251,10 @@ namespace InventoryManagementSystem
             isDirty = false; // Reset the dirty flag after viewing products
         }
 
+
+        /*
+         * ViewProduct method displays a single product's details at the specified x and y coordinates in the console.
+         */
         internal static void ViewProduct(int x, int y, Product product)
         {
             Console.SetCursorPosition(x, y);
@@ -261,7 +280,10 @@ namespace InventoryManagementSystem
         }
 
 
-
+        /*
+         * GenerateReport method generates a report of all products in the inventory and saves it to a file.
+         * It calculates the total value of the inventory and appends it to the report.
+         */
         internal static void GenerateReport()
         {
             // Implementation for saving to a file
@@ -292,6 +314,11 @@ namespace InventoryManagementSystem
             Console.ForegroundColor = ConsoleColor.White;
         }
 
+
+        /*
+         * SaveToFile method saves the current inventory to a file.
+         * It writes each product's details to the file in a comma-separated format.
+         */
         internal static void SaveToFile()
         {
 
@@ -321,6 +348,11 @@ namespace InventoryManagementSystem
 
         }
 
+        /*
+         * LoadFromFile method loads the inventory from a file.
+         * It reads each line from the file and creates a new product for each line.
+         * If a product with the same ID or name already exists, it skips adding that product.
+         */
         internal static void LoadFromFile()
         {
             // Implementation for loading from a file
@@ -359,7 +391,12 @@ namespace InventoryManagementSystem
         }
 
 
-        // Get a product by its ID. as information for the user to update or delete a product
+        /*
+         * GetProductById method gets a product by its ID.
+         * It searches for the product in the linked list and returns it if found.
+         * If the product is not found, it returns null.
+         * This method is used to retrieve a product's information for the user to update or delete a product.
+         */
         internal static Product GetProductById(int productId)
         {
             Product? currentProduct = firstProduct;
@@ -374,6 +411,13 @@ namespace InventoryManagementSystem
             return null; // Product not found
         }
 
+
+        /*
+         * GetProductByName method gets a product by its name.
+         * It searches for the product in the linked list and returns it if found.
+         * If the product is not found, it returns null.
+         * This method is used to retrieve a product's information for the user to update or delete a product.
+         */
         internal static Product GetProductByName(string productName)
         {
             Product? currentProduct = firstProduct;
@@ -389,7 +433,13 @@ namespace InventoryManagementSystem
         }
 
 
-        // Check for duplicate product name
+
+        /*
+         * CheckForDuplicateProductName method checks if a product with the same name already exists in the inventory.
+         * It searches for the product in the linked list and returns true if found.
+         * If the product is not found, it returns false.
+         * This method is used to prevent adding duplicate products to the inventory.
+         */
         internal static bool CheckForDuplicateProductName(string productName)
         {
             Product? currentProduct = firstProduct;
@@ -405,6 +455,13 @@ namespace InventoryManagementSystem
 
             return false;
         }
+
+        /*
+         * CheckForDuplicateProductId method checks if a product with the same ID already exists in the inventory.
+         * It searches for the product in the linked list and returns true if found.
+         * If the product is not found, it returns false.
+         * This method is used to prevent adding duplicate products to the inventory.
+         */
         internal static bool CheckForDuplicateProductId(int productId)
         {
             Product? currentProduct = firstProduct;
@@ -420,6 +477,12 @@ namespace InventoryManagementSystem
 
             return false;
         }
+
+        /*
+         * UpdateInventoryValue method calculates the total value of the inventory.
+         * It iterates through the linked list of products and sums up the value of each product (Price * Quantity).
+         * It returns the total value as a decimal.
+         */
         internal static decimal UpdateInventoryValue()
         {
             decimal totalValue = 0;
