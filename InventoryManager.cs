@@ -8,7 +8,11 @@ namespace InventoryManagementSystem
     {
 
         //       THIS SYSTEM USES A LINKED LIST TO STORE PRODUCTS IN THE INVENTORY.
-         
+
+
+        //      The linked list is implemented using the Product class, where each Product object has a reference to the next Product in the list.
+
+
 
         internal static int productIdCounter = 1;               // Counter for generating unique product IDs not the same as how many products are in the inventory
         private static Product? firstProduct = null;            // First product in linked list

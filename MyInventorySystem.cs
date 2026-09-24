@@ -567,7 +567,7 @@ namespace InventoryManagementSystem
          */
         internal void DeleteProduct()
         {
-            string result = "";
+
             Console.WriteLine("Delete product");
             Console.Write("Enter the ID or name:");
             string input = Console.ReadLine()?.Trim() ?? string.Empty;
