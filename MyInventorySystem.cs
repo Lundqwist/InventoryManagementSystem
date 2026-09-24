@@ -289,7 +289,7 @@ namespace InventoryManagementSystem
                 Console.SetCursorPosition(0, 13);
                 for (int i = 0; i < 4; i++)
                 {
-                    Console.WriteLine("                                 ");
+                    Console.WriteLine("                                       ");
                 }
                 Console.SetCursorPosition(0, 13);
                 Console.Write("Enter product quantity:");
